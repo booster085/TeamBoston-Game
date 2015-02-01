@@ -28,22 +28,18 @@ public class Obstacle {
 	public void tick(Game game) {
 
 		boundingBox.setBounds(x, y, width, height);
-//		//if (!isTwoPlayer) {  // if two player is no checked AI controls the paddle
-//			if (game.ball.y < y && y >= 0) {//&& game.ball.x > game.getWidth() / 2) { 
-//				// if the paddle is under the ball and is in the screen
-//				y -= speed; // paddle goes up
-//			} else if (game.ball.y > y && y + height <= game.getHeight()){
-//					//&& game.ball.x > game.getWidth() / 2) {  // not to move all the time ball moves
-//				// if paddle is over the ball and in the screen
-//				y += speed; // it goes down
-//			}
+//		
 			if (goingUp && y >= 0) { 
-				goingUp = false;
-				goingDown = true;
 				y -= speed;
+				if (y == 0) {
+					goingUp = false;
+					goingDown = true;
+				}
 			} else if (goingDown && y <= game.getHeight() - height) {
-				goingUp = true;
-				goingDown = false;
+				if (y == game.getHeight() - height) {
+					goingUp = true;
+					goingDown = false;
+				}
 				y += speed;
 			}
  	   }
