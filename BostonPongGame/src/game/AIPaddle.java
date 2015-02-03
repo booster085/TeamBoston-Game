@@ -7,7 +7,7 @@ import java.awt.Rectangle;
 public class AIPaddle {
 	int x, y; // paddle coordinates in the window
 	int width = 15; // paddle width
-	int height = 40; // paddle height
+	int height = 130; // paddle height
 	int speed = 1;
 
 	boolean isTwoPlayer = false;
