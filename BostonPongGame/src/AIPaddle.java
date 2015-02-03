@@ -28,7 +28,9 @@ public class AIPaddle {
 	public void tick(Game game) {
 
 		boundingBox.setBounds(x, y, width, height);
+		
 		if (!isTwoPlayer) {  // if two player is no checked AI controls the paddle
+			this.speed = game.player.score/10+2;
 			if (game.ball.y < y && y >= 0) {//&& game.ball.x > game.getWidth() / 2) { 
 				// if the paddle is under the ball and is in the screen
 				y -= speed; // paddle goes up
