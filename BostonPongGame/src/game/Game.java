@@ -36,8 +36,6 @@ public class Game extends Canvas implements Runnable {
 
 	static boolean gameRunning = false;
 	
-	int p1Score, p2Score;
-	
 	@Override
 	public void run() {
 
@@ -109,19 +107,19 @@ public class Game extends Canvas implements Runnable {
 		Graphics g = bs.getDrawGraphics();
 		
 		//THIS CHANGES THE BACKGROUND OF THE GAME
-		/*Image image = null;
+		Image image = null;
 		try {
 			image = ImageIO.read(new File("src/game/images/pongBack.jpg")); //load background image
 		} catch (IOException e) {
 			e.printStackTrace();
-		}*/
+		}
 		
 		// draw graphics on the screen, starts at 0, 0 - top left, high and wide
 		// as much as the frame
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), null); //draws background
 		g.setColor(Color.WHITE); //set player score text color
-		g.drawString("Player 1 score: " + p1Score, 10, 20); //draw scores 
-		g.drawString("Player 2 score: " + p2Score, getWidth() - 100, 20);
+		g.drawString("Player 1 score: " + player.score, 10, 20); //draw scores 
+		g.drawString("Player 2 score: " + ai.score, getWidth() - 100, 20);
 		player.render(g); //draws left paddle
 		ai.render(g); //draws right paddle
 		ball.render(g); //draws the ball

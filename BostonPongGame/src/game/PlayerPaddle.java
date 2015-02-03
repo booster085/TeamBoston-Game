@@ -13,6 +13,7 @@ public class PlayerPaddle {
 	boolean goingUp = false;
 	boolean goingDown = false;	
 	int speed = 2;
+	int score = 0;
 	
 	Rectangle boundingBox;
 

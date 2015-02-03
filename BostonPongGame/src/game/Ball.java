@@ -10,6 +10,7 @@ public class Ball {
 	int size = 16; //ball size 16x16
 	int vx, vy; //velocity x and y
 	int speed = 2;
+
 	
 	Rectangle boundingBox;
 		
@@ -22,16 +23,17 @@ public class Ball {
 		boundingBox = new Rectangle(x, y, size, size); //create bounding box for collisions
 		boundingBox.setBounds(x, y, size, size);		//set the bounding borders of that Rectangle
 	}
-
+	
 	public void tick(Game game) {
+		this.speed = game.player.score/5 + 2;
 		
 		boundingBox.setBounds(x, y, size, size);
 		
 		if (x <= 0) {  								//if ball is on the left border
-			game.p2Score++;
+			game.ai.score++;
 			vx = speed; 							//it will goes on the right (2)
 		} else if (x + size >= game.getWidth()) { //if ball is on the right border
-			game.p1Score++;
+			game.player.score++;
 			vx = -speed; 							//it will goes in the left (-2)
 		}
 		if (y <= 0) {  								//if ball is on the top border
@@ -55,13 +57,13 @@ public class Ball {
 			} else {
 			vx = -speed; //it changes direction
 			}
-//		} else if (boundingBox.intersects(game.obstacle.boundingBox)) {
-//				if (this.x > game.obstacle.x) {
-//					vx = speed;
-//				} else {
-//				vx = -speed; //it changes direction
-//			}
-		}
+		} else if (boundingBox.intersects(game.obstacle.boundingBox)) {
+				if (this.x > game.obstacle.x) {
+					vx = speed;
+				} else {
+				vx = -speed; //it changes direction
+			}
+	}
 	}
 	
 	public void render(Graphics g) {	//Here we can put some image for the ball
