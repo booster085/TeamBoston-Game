@@ -23,7 +23,7 @@ public class Game extends Canvas implements Runnable {
 	public static Ball ball;
 	public static Obstacle obstacle;
 	InputHandler IH;
-
+	public static Image image = null;
 	JFrame frame; //game window
 	public final int WIDTH = 800;
 	public final int HEIGHT = WIDTH / 16 * 9; // set 16x9 wide screen
@@ -81,14 +81,19 @@ public class Game extends Canvas implements Runnable {
 		frame.setTitle(TITLE);
 		frame.setLocationRelativeTo(null); // sets window location in the center
 											// of the screen
-		player = new PlayerPaddle(10, 80); //creates new paddle object -> our player
-		ai = new AIPaddle(getWidth() - 15, 80);  //creates right paddle -> AI player
+		player = new PlayerPaddle(0, 80); //creates new paddle object -> our player
+		ai = new AIPaddle(getWidth() - 5, 80);  //creates right paddle -> AI player
 		IH = new InputHandler(this); //create instance of InputHandler
 		frame.addKeyListener(IH);; //add this instance to the frame, 
 								  //it will be listening for keys
 		ball = new Ball(getWidth()/2, 80); //create the ball
 		obstacle = new Obstacle(getWidth() / 2, 80); //create obstacle -> Obstacle
-
+			Image image = null;
+		try {
+			image = ImageIO.read(new File("src/game/images/Mario.jpg")); //load background image
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void tick() {  //update state
@@ -107,12 +112,7 @@ public class Game extends Canvas implements Runnable {
 		Graphics g = bs.getDrawGraphics();
 		
 		//THIS CHANGES THE BACKGROUND OF THE GAME
-		Image image = null;
-		try {
-			image = ImageIO.read(new File("src/game/images/pongBack.jpg")); //load background image
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	
 		
 		// draw graphics on the screen, starts at 0, 0 - top left, high and wide
 		// as much as the frame
