@@ -24,16 +24,14 @@ public class Game extends Canvas implements Runnable {
 	public static Obstacle obstacle;
 	InputHandler IH;
 	public static Image image = null;
+	public static Sound hit;
+
 	JFrame frame; //game window
 	public final int WIDTH = 800;
 	public final int HEIGHT = WIDTH / 16 * 9; // set 16x9 wide screen
 	public final Dimension gameSize = new Dimension(WIDTH, HEIGHT);
 	public final String TITLE = "Team Boston Pong";
 	
-	// creates stream buffer with width, height and 8 bit color red, green, blue
-	BufferedImage image = new BufferedImage(WIDTH, HEIGHT,
-			BufferedImage.TYPE_INT_RGB);
-
 	static boolean gameRunning = false;
 	
 	@Override
@@ -88,12 +86,13 @@ public class Game extends Canvas implements Runnable {
 								  //it will be listening for keys
 		ball = new Ball(getWidth()/2, 80); //create the ball
 		obstacle = new Obstacle(getWidth() / 2, 80); //create obstacle -> Obstacle
-			Image image = null;
+		
 		try {
 			image = ImageIO.read(new File("src/game/images/Mario.jpg")); //load background image
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 	}
 
 	public void tick() {  //update state
@@ -110,9 +109,6 @@ public class Game extends Canvas implements Runnable {
 			return;
 		}
 		Graphics g = bs.getDrawGraphics();
-		
-		//THIS CHANGES THE BACKGROUND OF THE GAME
-	
 		
 		// draw graphics on the screen, starts at 0, 0 - top left, high and wide
 		// as much as the frame

@@ -50,14 +50,17 @@ public class Ball {
 	
 	public void paddleCollide(Game game) {
 		if (boundingBox.intersects(game.player.boundingBox )) { //if ball intersects player paddle
+			Sound.HIT.play();
 			vx = speed;											//it changes direction
 		} else if (boundingBox.intersects(game.ai.boundingBox)) { //if ball intersects ai paddle
+			Sound.HIT.play();
 			if (this.x > game.ai.x) {
 				vx = speed;
 			} else {
 			vx = -speed; //it changes direction
 			}
 		} else if (boundingBox.intersects(game.obstacle.boundingBox)) {
+			Sound.HIT.play();
 				if (this.x > game.obstacle.x) {
 					vx = speed;
 				} else {
@@ -67,7 +70,7 @@ public class Ball {
 	}
 	
 	public void render(Graphics g) {	//Here we can put some image for the ball
-		g.setColor(Color.RED);
+		g.setColor(Color.WHITE);
 		g.fillOval(x, y, size, size);
 	}
 }

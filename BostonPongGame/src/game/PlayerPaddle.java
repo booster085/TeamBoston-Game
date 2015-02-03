@@ -8,11 +8,11 @@ public class PlayerPaddle {
 	
 	int x, y; //paddle coordinates in the window
 	int width = 15; //paddle width
-	int height = 130; //paddle height
+	int height = 100; //paddle height
 	
 	boolean goingUp = false;
 	boolean goingDown = false;	
-	int speed = 2;
+	int speed = 3;
 	int score = 0;
 	
 	Rectangle boundingBox;

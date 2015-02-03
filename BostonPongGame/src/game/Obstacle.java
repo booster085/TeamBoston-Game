@@ -8,7 +8,7 @@ public class Obstacle {
 	
 	int x, y; // paddle coordinates in the window
 	int width = 15; // paddle width
-	int height = 80; // paddle height
+	int height = 40; // paddle height
 	int speed = 1;
 	
 	boolean isTwoPlayer = false;
@@ -26,9 +26,11 @@ public class Obstacle {
 	}
 
 	public void tick(Game game) {
+		if ((game.player.score > 8 || game.ai.score > 8) && this.height < 200) {
+			this.height = ((game.player.score + game.ai.score)*10 + 60); 
+		}
 
 		boundingBox.setBounds(x, y, width, height);
-//		
 			if (goingUp && y >= 0) { 
 				y -= speed;
 				if (y == 0) {
