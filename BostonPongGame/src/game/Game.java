@@ -109,12 +109,12 @@ public class Game extends Canvas implements Runnable {
 		Graphics g = bs.getDrawGraphics();
 		
 		//THIS CHANGES THE BACKGROUND OF THE GAME
-		/*Image image = null;
+		Image image = null;
 		try {
 			image = ImageIO.read(new File("src/game/images/pongBack.jpg")); //load background image
 		} catch (IOException e) {
 			e.printStackTrace();
-		}*/
+		}
 		
 		// draw graphics on the screen, starts at 0, 0 - top left, high and wide
 		// as much as the frame
