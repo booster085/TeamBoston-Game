@@ -25,7 +25,7 @@ public class Ball {
 	}
 	
 	public void tick(Game game) {
-		this.speed = game.player.score/5 + 2;
+		this.speed = game.player.score/10 + 2;
 		
 		boundingBox.setBounds(x, y, size, size);
 		
