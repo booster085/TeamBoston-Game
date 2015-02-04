@@ -25,9 +25,10 @@ public class Obstacle {
 		boundingBox.setBounds(x, y, width, height); // set the bounding borders of that Rectangle
 	}
 
+	@SuppressWarnings("static-access")
 	public void tick(Game game) {
-		if ((game.player.score > 8 || game.ai.score > 8) && this.height < 200) {
-			this.height = ((game.player.score + game.ai.score)*10 + 60); 
+		if ((game.player.score + game.ai.score + 1) % 10 == 0 && this.height <= 240) {
+			this.height = 60*((game.player.score + game.ai.score + 1) / 10); 
 		}
 
 		boundingBox.setBounds(x, y, width, height);
@@ -48,7 +49,7 @@ public class Obstacle {
 //	}
 
 	public void render(Graphics g) {
-		g.setColor(Color.BLUE);
+		g.setColor(Color.WHITE);
 		g.fillRect(x, y, width, height);
 
 	}

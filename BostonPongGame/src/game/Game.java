@@ -25,7 +25,7 @@ public class Game extends Canvas implements Runnable {
 	InputHandler IH;
 	public static Image image = null;
 	public static Sound hit;
-
+	public BufferedImage buffImg = new BufferedImage(800, 450, BufferedImage.TYPE_INT_ARGB);
 	JFrame frame; //game window
 	public final int WIDTH = 800;
 	public final int HEIGHT = WIDTH / 16 * 9; // set 16x9 wide screen
@@ -33,6 +33,7 @@ public class Game extends Canvas implements Runnable {
 	public final String TITLE = "Team Boston Pong";
 	
 	static boolean gameRunning = false;
+	
 	
 	@Override
 	public void run() {
@@ -86,12 +87,12 @@ public class Game extends Canvas implements Runnable {
 								  //it will be listening for keys
 		ball = new Ball(getWidth()/2, 80); //create the ball
 		obstacle = new Obstacle(getWidth() / 2, 80); //create obstacle -> Obstacle
-		
 		try {
-			image = ImageIO.read(new File("src/game/images/Mario.jpg")); //load background image
+			buffImg = ImageIO.read(new File("src/game/images/Mario.jpg")); //load background image
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		Sound.MUSIC.loop();
 
 	}
 
@@ -112,10 +113,14 @@ public class Game extends Canvas implements Runnable {
 		
 		// draw graphics on the screen, starts at 0, 0 - top left, high and wide
 		// as much as the frame
-		g.drawImage(image, 0, 0, getWidth(), getHeight(), null); //draws background
+		g.drawImage(buffImg, 0, 0, getWidth(), getHeight(), null); //draws background
 		g.setColor(Color.WHITE); //set player score text color
 		g.drawString("Player 1 score: " + player.score, 10, 20); //draw scores 
 		g.drawString("Player 2 score: " + ai.score, getWidth() - 100, 20);
+		if (player.score == 50 || ai.score == 50 ) {
+			String win = (player.score > ai.score ? "Player 1" : "Player 2") + " WINS";
+			g.drawString(win, 350, 200);
+		}
 		player.render(g); //draws left paddle
 		ai.render(g); //draws right paddle
 		ball.render(g); //draws the ball

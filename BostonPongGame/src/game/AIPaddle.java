@@ -8,7 +8,7 @@ public class AIPaddle {
 	int x, y; // paddle coordinates in the window
 	int width = 15; // paddle width
 	int height = 100; // paddle height
-	int speed = 3;
+	int speed = 1;
 	int score = 0;
 
 	boolean isTwoPlayer = false;
@@ -30,8 +30,8 @@ public class AIPaddle {
 
 		boundingBox.setBounds(x, y, width, height);
 		if (!isTwoPlayer) {  // if two player is no checked AI controls the paddle
-			if (game.player.score > 8 || game.ai.score > 8) {
-				this.speed = ((game.player.score + game.ai.score)/10 + 1); 
+			if (game.player.score + game.ai.score > 7) {
+				this.speed = ((game.player.score + game.ai.score)/15 + 2); 
 			}
 			if (game.ball.y < y + height/2 && y >= 0) {
 				// if the paddle is under the ball and is in the screen
@@ -41,6 +41,7 @@ public class AIPaddle {
 				y += speed; // it goes down
 			}
 		} else { // if two players is checked paddle is under 2nd player control
+			this.speed = 3;
 			if (goingUp && y > 0) { 
 				y -= speed;
 			}
@@ -51,7 +52,7 @@ public class AIPaddle {
 	}
 
 	public void render(Graphics g) {
-		g.setColor(Color.BLUE);
+		g.setColor(Color.RED);
 		g.fillRect(x, y, width, height);
 
 	}

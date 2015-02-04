@@ -25,15 +25,18 @@ public class Ball {
 	}
 	
 	public void tick(Game game) {
-		this.speed = game.player.score/10 + 2;
-		
+		if (game.player.score + game.ai.score > 9) {
+			this.speed = ((game.player.score + game.ai.score)/10 + 2); 
+		}
 		boundingBox.setBounds(x, y, size, size);
 		
 		if (x <= 0) {  								//if ball is on the left border
 			game.ai.score++;
+			Sound.POINT.play();
 			vx = speed; 							//it will goes on the right (2)
 		} else if (x + size >= game.getWidth()) { //if ball is on the right border
 			game.player.score++;
+			Sound.POINT.play();
 			vx = -speed; 							//it will goes in the left (-2)
 		}
 		if (y <= 0) {  								//if ball is on the top border

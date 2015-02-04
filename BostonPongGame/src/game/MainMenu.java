@@ -53,6 +53,7 @@ public class MainMenu extends JFrame {
 
 	private void addActions() {
 		Play.addActionListener(new ActionListener() { // Set action listener on Play button
+			@SuppressWarnings("static-access")
 			@Override
 			public void actionPerformed(ActionEvent e) { // when Play is pressed:
 				dispose(); // Releases all of the native screen resources used by 

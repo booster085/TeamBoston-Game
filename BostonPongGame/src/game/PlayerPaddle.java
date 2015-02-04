@@ -10,7 +10,7 @@ public class PlayerPaddle {
 	int width = 15; //paddle width
 	int height = 100; //paddle height
 	
-	boolean goingUp = false;
+	static boolean goingUp = false;
 	boolean goingDown = false;	
 	int speed = 3;
 	int score = 0;
@@ -28,6 +28,9 @@ public class PlayerPaddle {
 	public void tick(Game game) {
 		
 		boundingBox.setBounds(x, y, width, height);
+		if (game.player.score + game.ai.score > 29) {
+			this.speed = ((game.player.score + game.ai.score)/15 + 2); 
+		}
 		
 		if (goingUp && y > 0) {
 			y -= speed;
@@ -38,7 +41,7 @@ public class PlayerPaddle {
 	}
 	
 	public void render(Graphics g) {
-		g.setColor(Color.BLUE);
+		g.setColor(Color.YELLOW);
 		g.fillRect(x, y, width, height);
 		
 	}
