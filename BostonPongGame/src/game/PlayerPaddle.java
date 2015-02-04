@@ -26,18 +26,20 @@ public class PlayerPaddle {
 	}
 	
 	public void tick(Game game) {
+		if (!game.isGameOver) {
+			boundingBox.setBounds(x, y, width, height);
+			if (game.player.score + game.ai.score > 29) {
+				this.speed = ((game.player.score + game.ai.score)/15 + 2); 
+			}
+			
+			if (goingUp && y > 0) {
+				y -= speed;
+			}
+			if (goingDown && y < game.getHeight() - height) {
+				y += speed;
+			}
+		} else {this.speed = 0;}
 		
-		boundingBox.setBounds(x, y, width, height);
-		if (game.player.score + game.ai.score > 29) {
-			this.speed = ((game.player.score + game.ai.score)/15 + 2); 
-		}
-		
-		if (goingUp && y > 0) {
-			y -= speed;
-		}
-		if (goingDown && y < game.getHeight() - height) {
-			y += speed;
-		}
 	}
 	
 	public void render(Graphics g) {

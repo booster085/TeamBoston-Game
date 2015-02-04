@@ -66,6 +66,7 @@ public class MainMenu extends JFrame {
 					game.ai.isTwoPlayer = false;
 				}
 				game.start();;  // creates new game and start
+				
 
 			}
 		});

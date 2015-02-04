@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferStrategy;
@@ -23,17 +24,14 @@ public class Game extends Canvas implements Runnable {
 	public static Ball ball;
 	public static Obstacle obstacle;
 	InputHandler IH;
-	public static Image image = null;
-	public static Sound hit;
 	public BufferedImage buffImg = new BufferedImage(800, 450, BufferedImage.TYPE_INT_ARGB);
 	JFrame frame; //game window
 	public final int WIDTH = 800;
 	public final int HEIGHT = WIDTH / 16 * 9; // set 16x9 wide screen
-	public final Dimension gameSize = new Dimension(WIDTH, HEIGHT);
+	public final Dimension GAMESIZE = new Dimension(WIDTH, HEIGHT);
 	public final String TITLE = "Team Boston Pong";
-	
+	public static boolean isGameOver = false;
 	static boolean gameRunning = false;
-	
 	
 	@Override
 	public void run() {
@@ -63,9 +61,9 @@ public class Game extends Canvas implements Runnable {
 
 	public Game() { // constructor of the class
 		frame = new JFrame();
-		setMinimumSize(gameSize);
-		setPreferredSize(gameSize);
-		setMaximumSize(gameSize);
+		setMinimumSize(GAMESIZE);
+		setPreferredSize(GAMESIZE);
+		setMaximumSize(GAMESIZE);
 
 		frame.add(this, BorderLayout.CENTER); // add the game canvas window in
 												// the frame, at the center
@@ -115,11 +113,16 @@ public class Game extends Canvas implements Runnable {
 		// as much as the frame
 		g.drawImage(buffImg, 0, 0, getWidth(), getHeight(), null); //draws background
 		g.setColor(Color.WHITE); //set player score text color
-		g.drawString("Player 1 score: " + player.score, 10, 20); //draw scores 
-		g.drawString("Player 2 score: " + ai.score, getWidth() - 100, 20);
-		if (player.score == 50 || ai.score == 50 ) {
-			String win = (player.score > ai.score ? "Player 1" : "Player 2") + " WINS";
-			g.drawString(win, 350, 200);
+		g.setFont(new Font("Arial", Font.PLAIN, 16));
+		g.drawString("score: " + player.score, 20, 25); //draw scores 
+		g.drawString("score: " + ai.score, getWidth() - 80, 25);
+		if (player.score == 30 || ai.score == 30 ) {
+			g.setFont(new Font("Arial", Font.BOLD, 48));
+			String win = (player.score > ai.score ? "player 1" : "player 2") + " wins";
+			isGameOver = true;
+			Sound.turnOffSounds();
+			g.drawString("GAME OVER", 270, 140);
+			g.drawString(win, 270, 200);
 		}
 		player.render(g); //draws left paddle
 		ai.render(g); //draws right paddle

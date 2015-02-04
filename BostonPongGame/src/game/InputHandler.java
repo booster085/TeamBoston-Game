@@ -28,7 +28,7 @@ public class InputHandler implements KeyListener{
 		
 		// other controls
 		if (keyCode == KeyEvent.VK_ESCAPE) { // key 'ESCAPE' is for program shut down
-			System.exit(0);
+			new MainMenu();
 		}
 		
 	}
