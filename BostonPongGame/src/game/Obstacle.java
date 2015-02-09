@@ -6,16 +6,88 @@ import java.awt.Rectangle;
 
 public class Obstacle {
 
-	int x, y; // paddle coordinates in the window
-	int width = 15; // paddle width
-	int height = 40; // paddle height
-	int speed = 1;
+	private int x, y; // paddle coordinates in the window
+	private int width = 15; // paddle width
+	private int height = 40; // paddle height
+	private int speed = 1;
 
-	boolean isTwoPlayer = false;
-	boolean goingUp = true;
-	boolean goingDown = false;
+	private boolean isTwoPlayer = false;
+	private boolean goingUp = true;
+	private boolean goingDown = false;
 
-	Rectangle boundingBox;
+	private Rectangle boundingBox;
+
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	public int getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
+
+	public boolean isTwoPlayer() {
+		return isTwoPlayer;
+	}
+
+	public void setTwoPlayer(boolean isTwoPlayer) {
+		this.isTwoPlayer = isTwoPlayer;
+	}
+
+	public boolean isGoingUp() {
+		return goingUp;
+	}
+
+	public void setGoingUp(boolean goingUp) {
+		this.goingUp = goingUp;
+	}
+
+	public boolean isGoingDown() {
+		return goingDown;
+	}
+
+	public void setGoingDown(boolean goingDown) {
+		this.goingDown = goingDown;
+	}
+
+	public Rectangle getBoundingBox() {
+		return boundingBox;
+	}
+
+	public void setBoundingBox(Rectangle boundingBox) {
+		this.boundingBox = boundingBox;
+	}
 
 	public Obstacle(int x, int y) {
 		this.x = x;
@@ -29,10 +101,10 @@ public class Obstacle {
 
 	@SuppressWarnings("static-access")
 	public void tick(Game game) {
-		if (!game.isGameOver) {
-			if ((game.player.score + game.ai.score + 1) % 10 == 0
-					&& this.height <= 240) {
-				this.height = 60 * ((game.player.score + game.ai.score + 1) / 10);
+		if (!game.isGameOver()) {
+			if ((game.player.getScore() + game.ai.getScore() + 1) % 10 == 0
+					&& this.height <= 200) {
+				this.height = 60 * ((game.player.getScore() + game.ai.getScore() + 1) / 10);
 			}
 
 			boundingBox.setBounds(x, y, width, height);

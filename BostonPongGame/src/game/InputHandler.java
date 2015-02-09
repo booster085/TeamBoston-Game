@@ -13,17 +13,17 @@ public class InputHandler implements KeyListener{
 		int keyCode = e.getKeyCode();
 		// Player 1 controls
 		if (keyCode == KeyEvent.VK_W) {  //key 'W' is for left paddle going up
-			Game.player.goingUp = true;
+			Game.player.setGoingUp(true);
 		}
 		if (keyCode == KeyEvent.VK_S) {  //key 'S' is for left paddle going down
-			Game.player.goingDown = true;
+			Game.player.setGoingDown(true);
 		}
 		// Player 2 controls
 		if (keyCode == KeyEvent.VK_UP) { // key 'UP' is for right paddle going up
-			Game.ai.goingUp = true;
+			Game.ai.setGoingUp(true);
 		}
 		if (keyCode == KeyEvent.VK_DOWN) { // key 'DOWN' is for right paddle going down
-			Game.ai.goingDown = true;
+			Game.ai.setGoingDown(false);
 		}
 		
 		// other controls
@@ -38,17 +38,17 @@ public class InputHandler implements KeyListener{
 		int keyCode = e.getKeyCode();
 		// Player 1 controls
 		if (keyCode == KeyEvent.VK_W) {  //key 'W' is for paddle going up
-			Game.player.goingUp = false;
+			Game.player.setGoingUp(false);
 		}
 		if (keyCode == KeyEvent.VK_S) {  //key 'S' is for paddle going down
-			Game.player.goingDown = false;
+			Game.player.setGoingDown(false);
 		}
 		// Player 2 controls
 		if (keyCode == KeyEvent.VK_UP) { // key 'UP' is for right paddle going up
-			Game.ai.goingUp = false;
+			Game.ai.setGoingUp(false);
 		}
 		if (keyCode == KeyEvent.VK_DOWN) { // key 'DOWN' is for right paddle going down
-			Game.ai.goingDown = false;
+			Game.ai.setGoingDown(false);
 		}
 	}
 

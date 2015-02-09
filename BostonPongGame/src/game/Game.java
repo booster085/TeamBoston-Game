@@ -30,8 +30,25 @@ public class Game extends Canvas implements Runnable {
 	public final int HEIGHT = WIDTH / 16 * 9; // set 16x9 wide screen
 	public final Dimension GAMESIZE = new Dimension(WIDTH, HEIGHT);
 	public final String TITLE = "Team Boston Pong";
-	public static boolean isGameOver = false;
-	static boolean gameRunning = false;
+	private boolean isGameOver = false;
+	private boolean gameRunning = false;
+	public boolean isGameOver() {
+		return isGameOver;
+	}
+
+	public void setGameOver(boolean isGameOver) {
+		this.isGameOver = isGameOver;
+	}
+
+	public boolean isGameRunning() {
+		return gameRunning;
+	}
+
+	public void setGameRunning(boolean gameRunning) {
+		this.gameRunning = gameRunning;
+	}
+
+	
 	
 	@Override
 	public void run() {
@@ -54,7 +71,7 @@ public class Game extends Canvas implements Runnable {
 		new Thread(this).start();
 	}
 	
-	public static synchronized void stop() { //stop the game, stop the running thread
+	public synchronized void stop() { //stop the game, stop the running thread
 		gameRunning = false;
 		System.exit(0);
 	}
@@ -86,7 +103,7 @@ public class Game extends Canvas implements Runnable {
 		ball = new Ball(getWidth()/2, 80); //create the ball
 		obstacle = new Obstacle(getWidth() / 2, 80); //create obstacle -> Obstacle
 		try {
-			buffImg = ImageIO.read(new File("src/game/images/Mario.jpg")); //load background image
+			buffImg = ImageIO.read(new File("src/game/images/back1.jpg")); //load background image
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -114,13 +131,15 @@ public class Game extends Canvas implements Runnable {
 		g.drawImage(buffImg, 0, 0, getWidth(), getHeight(), null); //draws background
 		g.setColor(Color.WHITE); //set player score text color
 		g.setFont(new Font("Arial", Font.PLAIN, 16));
-		g.drawString("score: " + player.score, 20, 25); //draw scores 
-		g.drawString("score: " + ai.score, getWidth() - 80, 25);
-		if (player.score == 30 || ai.score == 30 ) {
+		g.drawString("score: " + player.getScore(), 20, 25); //draw scores 
+		g.drawString("score: " + ai.getScore(), getWidth() - 80, 25);
+		if (player.getScore() == 30 || ai.getScore() == 30 ) {
 			g.setFont(new Font("Arial", Font.BOLD, 48));
-			String win = (player.score > ai.score ? "player 1" : "player 2") + " wins";
+			String win = (player.getScore() > ai.getScore() ? "player 1" : "player 2") + " wins";
 			isGameOver = true;
-			Sound.turnOffSounds();
+			if (isGameOver) {
+				Sound.MUSIC.stop();
+			}
 			g.drawString("GAME OVER", 270, 140);
 			g.drawString(win, 270, 200);
 		}

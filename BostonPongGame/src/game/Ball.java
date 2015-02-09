@@ -4,16 +4,58 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
+import com.sun.org.apache.bcel.internal.generic.GETSTATIC;
+
 public class Ball {
 	
-	int x, y; //ball coordinates
-	int size = 16; //ball size 16x16
-	int vx, vy; //velocity x and y
-	int speed = 2;
+	private int x, y; //ball coordinates
+	private int size = 16; //ball size 16x16
+	private int vx, vy; //velocity x and y
+	private int speed = 2;
 
 	
-	Rectangle boundingBox;
+	private Rectangle boundingBox;
 		
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public int getSize() {
+		return size;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
+	}
+
+	public int getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
+
+	public Rectangle getBoundingBox() {
+		return boundingBox;
+	}
+
+	public void setBoundingBox(Rectangle boundingBox) {
+		this.boundingBox = boundingBox;
+	}
+
 	public Ball(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -26,18 +68,18 @@ public class Ball {
 	
 	@SuppressWarnings("static-access")
 	public void tick(Game game) {
-		if (!game.isGameOver) {
-			if (game.player.score + game.ai.score > 9) {
-				this.speed = ((game.player.score + game.ai.score)/10 + 2); 
+		if (!game.isGameOver()) {
+			if (game.player.getScore() + game.ai.getScore() > 9) {
+				this.speed = ((game.player.getScore() + game.ai.getScore())/10 + 2); 
 			}
 			boundingBox.setBounds(x, y, size, size);
 			
 			if (x <= 0) {  								//if ball is on the left border
-				game.ai.score++;
+				game.ai.setScore(game.ai.getScore() + 1);
 				Sound.POINT.play();
 				vx = speed; 							//it will goes on the right (2)
 			} else if (x + size >= game.getWidth()) { //if ball is on the right border
-				game.player.score++;
+				game.player.setScore(game.player.getScore() + 1);
 				Sound.POINT.play();
 				vx = -speed; 							//it will goes in the left (-2)
 			}
@@ -60,16 +102,16 @@ public class Ball {
 		if (boundingBox.intersects(game.player.boundingBox )) { //if ball intersects player paddle
 			Sound.HIT.play();
 			vx = speed;											//it changes direction
-		} else if (boundingBox.intersects(game.ai.boundingBox)) { //if ball intersects ai paddle
+		} else if (boundingBox.intersects(game.ai.getBoundingBox())) { //if ball intersects ai paddle
 			Sound.HIT.play();
-			if (this.x > game.ai.x) {
+			if (this.x > game.ai.getX()) {
 				vx = speed;
 			} else {
 			vx = -speed; //it changes direction
 			}
-		} else if (boundingBox.intersects(game.obstacle.boundingBox)) {
+		} else if (boundingBox.intersects(game.obstacle.getBoundingBox())) {
 			Sound.HIT.play();
-				if (this.x > game.obstacle.x) {
+				if (this.x > game.obstacle.getX()) {
 					vx = speed;
 				} else {
 				vx = -speed; //it changes direction

@@ -5,17 +5,90 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 public class AIPaddle {
-	int x, y; // paddle coordinates in the window
-	int width = 15; // paddle width
-	int height = 100; // paddle height
-	int speed = 1;
-	int score = 0;
+	private int x, y; // paddle coordinates in the window
+	private int width = 15; // paddle width
+	private int height = 100; // paddle height
+	private int speed = 1;
+	private int score = 0;
 
-	boolean isTwoPlayer = false;
-	boolean goingUp = false;
-	boolean goingDown = false;
+	private boolean isTwoPlayer = false;
+	private boolean goingUp = false;
+	private boolean goingDown = false;
 
-	Rectangle boundingBox;
+	private Rectangle boundingBox;
+	
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	public int getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+	public boolean isTwoPlayer() {
+		return isTwoPlayer;
+	}
+
+	public void setTwoPlayer(boolean isTwoPlayer) {
+		this.isTwoPlayer = isTwoPlayer;
+	}
+
+	public boolean isGoingUp() {
+		return goingUp;
+	}
+
+	public void setGoingUp(boolean goingUp) {
+		this.goingUp = goingUp;
+	}
+
+	public boolean isGoingDown() {
+		return goingDown;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public void setGoingDown(boolean goingDown) {
+		this.goingDown = goingDown;
+	}
+
+	public Rectangle getBoundingBox() {
+		return boundingBox;
+	}
+
+	public void setBoundingBox(Rectangle boundingBox) {
+		this.boundingBox = boundingBox;
+	}
 
 	public AIPaddle(int x, int y) {
 		this.x = x;
@@ -29,15 +102,15 @@ public class AIPaddle {
 		
 
 		boundingBox.setBounds(x, y, width, height);
-		if (!game.isGameOver) {
+		if (!game.isGameOver()) {
 			if (!isTwoPlayer) {  // if two player is no checked AI controls the paddle
-				if (game.player.score + game.ai.score > 7) {
-					this.speed = ((game.player.score + game.ai.score)/15 + 2); 
+				if (game.player.getScore() + game.ai.score > 7) {
+					this.speed = ((game.player.getScore() + game.ai.score)/15 + 2); 
 				}
-				if (game.ball.y < y + height/2 && y >= 0) {
+				if (game.ball.getY() < y + height/2 && y >= 0) {
 					// if the paddle is under the ball and is in the screen
 					y -= speed; // paddle goes up
-				} else if (game.ball.y > y + height/2 && y + height <= game.getHeight()){
+				} else if (game.ball.getY() > y + height/2 && y + height <= game.getHeight()){
 					// if paddle is over the ball and in the screen
 					y += speed; // it goes down
 				}

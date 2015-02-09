@@ -11,14 +11,14 @@ public class MainMenu extends JFrame {
 
 	private static final long serialVersionUID = 2L;
 
-	int screenWidth = 400;
-	int screenHeight = screenWidth / 16 * 9;
+	private int screenWidth = 400;
+	private int screenHeight = screenWidth / 16 * 9;
 
-	int buttonWidth = 100;
-	int buttonHeight = 40;
+	private int buttonWidth = 100;
+	private int buttonHeight = 40;
 
-	JButton Play, Quit;
-	JCheckBox twoPlayer;
+	private JButton Play, Quit;
+	private JCheckBox twoPlayer;
 	public MainMenu() {
 
 		addButtons();
@@ -61,9 +61,9 @@ public class MainMenu extends JFrame {
 				Game game = new Game();
 				
 				if (twoPlayer.isSelected()) {
-					game.ai.isTwoPlayer = true;
+					game.ai.setTwoPlayer(true);
 				} else {
-					game.ai.isTwoPlayer = false;
+					game.ai.setTwoPlayer(false);
 				}
 				game.start();;  // creates new game and start
 				
